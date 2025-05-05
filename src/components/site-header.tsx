@@ -1,6 +1,6 @@
 "use client"
 
-import { SidebarIcon } from "lucide-react"
+import { LogOut, SidebarIcon } from "lucide-react"
 
 import { SearchForm } from "@/components/search-form"
 import {
@@ -14,9 +14,12 @@ import {
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { useSidebar } from "@/components/ui/sidebar"
+import { GoToMainSiteButton } from "@/app/components/GoToMainSiteButton"
+import { useLogin } from "@/hooks/useLogin"
 
 export function SiteHeader() {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar } = useSidebar();
+  const { handleLogout } = useLogin();
 
   return (
     <header className="fle sticky top-0 z-50 w-full items-center border-b bg-background">
@@ -30,7 +33,7 @@ export function SiteHeader() {
           <SidebarIcon />
         </Button>
         <Separator orientation="vertical" className="mr-2 h-4" />
-        <Breadcrumb className="hidden sm:block">
+        {/* <Breadcrumb className="hidden sm:block">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="#">
@@ -42,8 +45,12 @@ export function SiteHeader() {
               <BreadcrumbPage>Data Fetching</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
-        </Breadcrumb>
+        </Breadcrumb> */}
+        <GoToMainSiteButton />
         <SearchForm className="w-full sm:ml-auto sm:w-auto" />
+        <Button className="ml-auto" variant="ghost" size="sm" onClick={handleLogout}>
+          <LogOut className="w-6 h-6" /> Logout
+        </Button>
       </div>
     </header>
   )

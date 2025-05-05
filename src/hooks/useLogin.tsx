@@ -15,7 +15,6 @@ interface LoginState {
   loading: boolean;
 }
 
-// Helper function to convert Firebase User to SerializableUser
 const serializeUser = (user: User): SerializableUser => ({
   uid: user.uid,
   email: user.email,
@@ -48,8 +47,22 @@ export function useLogin(
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, state.email, state.password);
-      const serializableUser = serializeUser(userCredential.user);
-      dispatch(setUser(serializableUser));
+      const firebaseUser = userCredential.user;
+      console.log('Firebase UID:', firebaseUser.uid);
+
+      // Fetch user data from PostgreSQL via API
+      const token = await firebaseUser.getIdToken();
+      const response = await fetch('/api/auth/user', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const userData: SerializableUser = await response.json();
+      dispatch(setUser(userData));
+
       setState({
         email: '',
         password: '',

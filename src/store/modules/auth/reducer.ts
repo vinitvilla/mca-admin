@@ -1,6 +1,6 @@
 // src/store/modules/auth/reducer.ts
-import { SET_USER, CLEAR_USER, SerializableUser } from "./types";
-import { AuthActionTypes } from "./actions";
+import { SET_USER, CLEAR_USER, SerializableUser } from './types';
+import { AuthActionTypes } from './actions';
 
 export interface AuthState {
   user: SerializableUser | null;

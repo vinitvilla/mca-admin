@@ -23,6 +23,7 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const router = useRouter();
+  const { isAuthenticated, user } = useSelector((state: { auth: AuthState }) => state.auth);
 
   const {
     email,
@@ -34,18 +35,18 @@ export function LoginForm({
     setEmail,
     setPassword,
   } = useLogin(
-    () => router.push('/dashboard'), // onLoginSuccess
-    () => router.push('/login')     // onLogoutSuccess
+    () => router.push('/'), // onLoginSuccess
+    () => router.push('/login') // onLogoutSuccess
   );
 
-  const { isAuthenticated, user } = useSelector((state: { auth: AuthState }) => state.auth);
-
-  // Handle redirection when authentication state changes
+  // Redirect based on auth state
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/dashboard');
+    if (isAuthenticated && user?.roleName === 'admin') {
+      router.push('/content');
+    } else if (isAuthenticated) {
+      router.push('/'); // Non-admins go to public home
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -56,7 +57,7 @@ export function LoginForm({
           </CardTitle>
           <CardDescription>
             {isAuthenticated
-              ? `Logged in as ${user?.email || 'User'}`
+              ? `Logged in as ${user?.displayName || user?.email || 'User'} (${user?.roleName || 'Unknown Role'})`
               : 'Enter your email below to login to your account'}
           </CardDescription>
         </CardHeader>
@@ -88,6 +89,7 @@ export function LoginForm({
                   <Input
                     id="password"
                     type="password"
+                    placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -103,12 +105,6 @@ export function LoginForm({
                 >
                   {loading ? 'Logging in...' : 'Login'}
                 </Button>
-              </div>
-              <div className="mt-4 text-center text-sm">
-                Don't have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
-                  Sign up
-                </a>
               </div>
             </form>
           ) : (

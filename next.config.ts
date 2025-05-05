@@ -1,14 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return [
+  serverExternalPackages: ['knex'],
+  images: {
+    remotePatterns: [
       {
-        source: '/',
-        destination: '/dashboard',
-        permanent: true,
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '/v0/b/**', // Matches your Firebase Storage URL pattern
       },
-    ];
+    ],
   },
 };
 

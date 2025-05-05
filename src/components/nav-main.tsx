@@ -18,6 +18,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { title } from "process"
 
 export function NavMain({
   items,
@@ -35,7 +36,7 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>MCA Admin</SidebarGroupLabel>
+      <SidebarGroupLabel>MCA ADMIN</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>

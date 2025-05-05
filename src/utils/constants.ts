@@ -1,14 +1,10 @@
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
+  BookOpenIcon,
+  Inbox,
+  UserRoundPlus,
+  Cog
 } from "lucide-react"
 
 export const data = {
@@ -19,89 +15,32 @@ export const data = {
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Pages Content",
+      url: "/content",
+      icon: BookOpenIcon,
       isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
+      title: "Configuration",
+      url: "/configuration",
+      icon: Cog,
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+      title: "Users",
+      url: "/users",
+      icon: UserRoundPlus,
+    }
+  ],
+  navPrimary: [
+    {
+      title: "Messages",
+      icon: Inbox,
+      url: "/messages",
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
+      title: "Joining Requests",
+      icon: UserRoundPlus,
+      url: "/join-us",
     },
   ],
   navSecondary: [
@@ -117,20 +56,20 @@ export const data = {
     },
   ],
   projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
+    // {
+    //   name: "Design Engineering",
+    //   url: "#",
+    //   icon: Frame,
+    // },
+    // {
+    //   name: "Sales & Marketing",
+    //   url: "#",
+    //   icon: PieChart,
+    // },
+    // {
+    //   name: "Travel",
+    //   url: "#",
+    //   icon: Map,
+    // },
   ],
 }

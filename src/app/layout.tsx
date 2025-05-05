@@ -5,6 +5,7 @@ import "./globals.css";
 import { store } from '@/store/store';
 import { Provider } from 'react-redux';
 import { AuthProvider } from "@/contexts/AuthContext";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +27,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <Provider store={store}>
+        <Provider store={store}>
+          <AuthProvider>
             {children}
-          </Provider>
-        </AuthProvider>
+            <Toaster />
+          </AuthProvider>
+        </Provider>
       </body>
     </html>
   );
 }
+
