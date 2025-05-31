@@ -40,7 +40,10 @@ const Messages = ({ }) => {
   const formatDateTime = (date: string) =>
     new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
 
-  const formatPhoneNumber = (phone: string) => {
+export const formatPhoneNumber = (phone: string) => {
+    if (phone == null) {
+      return "";
+    }
     const cleaned = phone.replace(/\D/g, "");
     const match = cleaned.match(/^(\d{1})(\d{3})(\d{3})(\d{4})$/);
     if (match) {
